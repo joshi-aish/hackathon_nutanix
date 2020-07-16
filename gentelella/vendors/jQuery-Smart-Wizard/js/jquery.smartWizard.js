@@ -77,12 +77,13 @@ function SmartWizard(target, options) {
                     var frm = $this.target.parents('form');
                     let userName=document.getElementById("user-name").value;
                     let password=document.getElementById("password").value;
-                    fetch("/post/data/here", {
+                    let formData = new FormData();
+                    formData.set('username',userName);
+                    formData.set('password',password);
+                    fetch("http://192.168.1.10:5000", {
                         method: "POST", 
-                        body: JSON.stringify({userName,password}),
-                        headers: {
-                            'Content-Type': 'application/json'
-                          },
+                        body: formData,
+                        mode: 'cors',
                       }).then(res => {
                         console.log("Request complete! response:", res);
                       });
